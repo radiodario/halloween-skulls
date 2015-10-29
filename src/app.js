@@ -1,5 +1,10 @@
 var THREE = require('three.js');
 require('./vendor/OBJLoader.js')(THREE);
+var SimplexNoise = require('simplex-noise');
+
+var t = 0;
+var simplex = new SimplexNoise();
+
 
 var container;
 var camera, scene, renderer;
@@ -88,7 +93,6 @@ function init() {
 function addSkulls() {
   for (var i = 0; i < maxSkulls; i++) {
     var mesh = new THREE.Mesh(skullGeom, skullMat);
-    debugger;
     var xGrid = i % width;
     var yGrid = i / width | 0;
     mesh.position.set(padX * xGrid, padY * yGrid, 0);
@@ -122,10 +126,12 @@ function onDocumentMouseMove( event ) {
 
 function twiddleSkulls() {
   var sk;
+  t += 0.01;
   var rotY;
   for (var i = 0; i < skulls.length; i++) {
+    //if (Math.random() > 0.2) continue;
     sk = skulls[i];
-    rotY = (-0.5 + Math.random()) * Math.random() * 0.5;
+    rotY = (-0.5 + simplex.noise2D(t, i)) * 0.5;
     sk.rotation.set(0, rotY, 0)
   }
 }
