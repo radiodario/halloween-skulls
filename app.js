@@ -36605,7 +36605,7 @@ var skulls = [];
 var width = 16;
 var height = 8;
 var maxSkulls = width * height;
-var padY = 50;
+var padY = 45;
 var padX = 38;
 
 init();
@@ -36709,7 +36709,7 @@ function onDocumentMouseMove( event ) {
 
 function twiddleSkulls() {
   var sk;
-  t += 0.01;
+  t += 0.005;
   var rotY;
   for (var i = 0; i < skulls.length; i++) {
     //if (Math.random() > 0.2) continue;
